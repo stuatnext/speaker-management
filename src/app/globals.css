@@ -51,6 +51,56 @@ a {
   color: var(--text-muted);
   font-size: 13px;
 }
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.header-nav a {
+  text-decoration: none;
+}
+
+/* NEXTPredict view */
+.doc-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.doc-links a {
+  font-weight: 600;
+}
+.stage-blurb {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.status-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.status-cell select {
+  height: 30px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 13px;
+  padding: 0 6px;
+  max-width: 190px;
+}
+tr.row-done td {
+  opacity: 0.55;
+}
+.footnote {
+  margin-top: 24px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
 .container {
   max-width: 1180px;
   margin: 0 auto;
