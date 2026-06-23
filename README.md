@@ -22,6 +22,22 @@ single source of truth.
 Contact details (company, job title, email) are **mirrored read-only** from the
 linked Speaker DB board, matching how the board is structured.
 
+## NEXTPredict 2026 tracking system
+
+For the conference content team (Rory Credland), there's a focused, Markdown-based
+tracking system for the **NEXTPredict 2026** pipeline under
+[`docs/nextpredict/`](./docs/nextpredict/README.md):
+
+- [`tracker.md`](./docs/nextpredict/tracker.md) — the live pipeline by stage,
+  owner, confirmed date and recommended next action.
+- [`playbook.md`](./docs/nextpredict/playbook.md) — how to secure speakers, with
+  tailored angles for priority targets.
+- [`email-templates.md`](./docs/nextpredict/email-templates.md) — copy-paste
+  outreach emails for every pipeline stage.
+
+Regenerate the tracker from the board any time with `npm run tracker:generate`
+(requires `MONDAY_API_TOKEN`).
+
 ## Getting started
 
 ### 1. Configure the monday.com API token
