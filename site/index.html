@@ -3,528 +3,2262 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="robots" content="noindex, nofollow"/>
-<title>NEXTPredict 2026 — Content Pipeline</title>
+<title>NEXTPredict 2026 — Speaker Battle Plan</title>
 <style>
   :root{--bg:#f6f7fb;--surface:#fff;--surface2:#f0f2f8;--border:#e3e6ef;--text:#1c1f2a;--muted:#6b7280;--primary:#4353ff;--radius:10px}
   *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
   header.top{background:var(--surface);border-bottom:1px solid var(--border);padding:18px 28px}
   header.top h1{margin:0;font-size:20px}header.top p{margin:4px 0 0;color:var(--muted);font-size:13px}
-  .container{max-width:1180px;margin:0 auto;padding:24px 28px 64px}
+  .container{max-width:1100px;margin:0 auto;padding:22px 28px 64px}
+  .tabs{position:sticky;top:0;z-index:10;display:flex;gap:6px;flex-wrap:wrap;background:var(--bg);padding:14px 0;margin-bottom:8px;border-bottom:1px solid var(--border)}
+  .tabs button{border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:7px 16px;font-size:13px;font-weight:600;cursor:pointer;color:var(--text)}
+  .tabs button.active{background:var(--primary);border-color:var(--primary);color:#fff}
+  .tab{display:none}.tab.active{display:block}
   .stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-  .stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;min-width:120px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;min-width:118px}
   .stat .v{font-size:22px;font-weight:700}.stat .l{font-size:12px;color:var(--muted)}
-  .doc-links{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:18px;font-size:13px;color:var(--muted)}
-  .doc-links a{font-weight:600;color:var(--primary)}
-  section{margin-bottom:28px}
+  section{margin-bottom:26px}
   .sec-head{display:flex;align-items:center;gap:10px;padding-left:10px;margin-bottom:6px}
   .sec-head h2{font-size:15px;margin:0}.count{font-size:12px;color:var(--muted);background:var(--surface2);padding:2px 8px;border-radius:999px}
   .blurb{margin:0 0 8px 10px;font-size:13px;color:var(--muted)}
   .table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
   table{width:100%;border-collapse:collapse}th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding:10px 14px;background:var(--surface2);border-bottom:1px solid var(--border)}
   td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:middle}tr:last-child td{border-bottom:none}
-  .name{font-weight:600}.sub{font-size:12px;color:var(--muted)}
+  .name{font-weight:600}.sub{font-size:12px;color:var(--muted)}.star{color:#f5a623}
   .badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:600;color:#fff;white-space:nowrap}
   .badge.muted{background:var(--surface2);color:var(--muted)}
   .tag{display:inline-block;padding:2px 7px;border-radius:6px;font-size:11px;background:var(--surface2);color:var(--muted);margin:1px 2px 1px 0}
-  .banner{background:#fff6e5;border:1px solid #ffd591;color:#8a5a00;padding:10px 14px;border-radius:var(--radius);font-size:12px;margin-bottom:18px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px}
+  .card.priority{border-color:#f5a623;box-shadow:0 0 0 1px #f5a62333}
+  .card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px}
+  .pill{display:inline-block;background:#fff3df;color:#a86b00;border-radius:999px;padding:1px 8px;font-size:11px;font-weight:600;margin-left:4px}
+  .card-meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+  .plan{margin:0 0 10px;font-size:13px}
+  .link-btn{background:none;border:none;color:var(--primary);font-weight:600;font-size:12px;cursor:pointer;padding:0}
+  .email{margin-top:8px;border-top:1px dashed var(--border);padding-top:8px}
+  .email-subj{font-size:12px;margin-bottom:6px}
+  pre{white-space:pre-wrap;background:var(--surface2);border-radius:8px;padding:12px;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;margin:0;overflow-x:auto}
+  .tpl{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px}
+  .tpl h3{margin:0 0 2px;font-size:15px}
+  .merge{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:18px}
+  .step{display:flex;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px}
+  .step-n{flex:none;width:30px;height:30px;border-radius:999px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .step h3{margin:0 0 3px;font-size:14px}.step p{margin:0;font-size:13px;color:var(--muted)}
+  .banner{background:#fff6e5;border:1px solid #ffd591;color:#8a5a00;padding:10px 14px;border-radius:var(--radius);font-size:12px;margin-bottom:16px}
+  .note{font-size:12px;color:var(--muted);margin:0 0 16px}
   footer{color:var(--muted);font-size:12px;margin-top:24px}
 </style></head>
 <body>
 <header class="top">
-  <h1>NEXTPredict 2026 — Content Pipeline</h1>
+  <h1>NEXTPredict 2026 — Speaker Battle Plan</h1>
   <p>64 speakers · static snapshot generated 2026-06-23 · NEXT.io content team</p>
 </header>
 <div class="container">
   <div class="banner">Static snapshot — read-only. The live source of truth is the Speakers Management board on monday.com; edit there and rebuild.</div>
+
   <div class="stats"><div class="stat" style="border-top:3px solid #ff6d3b"><div class="v">10</div><div class="l">In Discussion</div></div><div class="stat" style="border-top:3px solid #e484bd"><div class="v">1</div><div class="l">Invited</div></div><div class="stat" style="border-top:3px solid #a9bee8"><div class="v">24</div><div class="l">Potential</div></div><div class="stat" style="border-top:3px solid #9cd326"><div class="v">26</div><div class="l">Confirmed</div></div><div class="stat" style="border-top:3px solid #bb3354"><div class="v">3</div><div class="l">Declined</div></div><div class="stat" style="border-top:3px solid #4353ff"><div class="v">64</div><div class="l">Total</div></div></div>
-  <div class="doc-links"><span>Securing guidance:</span>
-    <a href="https://github.com/stuatnext/speaker-management/blob/main/docs/nextpredict/playbook.md">Playbook</a>
-    <a href="https://github.com/stuatnext/speaker-management/blob/main/docs/nextpredict/email-templates.md">Email templates</a>
-    <a href="https://github.com/stuatnext/speaker-management/blob/main/docs/nextpredict/tracker.md">Markdown tracker</a>
+
+  <div class="tabs">
+    <button data-tab="pipeline" class="active">📊 Pipeline</button>
+    <button data-tab="plans">🎯 Battle plans</button>
+    <button data-tab="emails">✉️ Email templates</button>
+    <button data-tab="method">📘 Method</button>
   </div>
-  <section>
+
+  <div id="pipeline" class="tab active">
+    <p class="note">Every speaker by pipeline stage, with the recommended next action and email template. ★ marks a priority target.</p>
+    <section>
       <div class="sec-head" style="border-left:4px solid #ff6d3b"><h2>💬 In Discussion</h2><span class="count">10</span></div>
-      <p class="blurb">Warm leads mid-conversation. Goal: lock topic + date this week. → Template C.</p>
+      <p class="blurb">Warm leads mid-conversation. Goal: lock topic + date this week.</p>
       <div class="table-wrap"><table>
         <thead><tr><th>Speaker</th><th>Status</th><th>Tracks</th><th>Confirmed</th><th>Recommended next action</th></tr></thead>
         <tbody><tr>
-          <td><div class="name">Aaron Champagne</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Send close — lock topic + date (Template C).</td>
-        </tr>
+        <td><div class="name">Aaron Champagne</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Send the close — lock topic + date. <em>(Template C)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Marshall Cohen</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-06-22</td>
-          <td class="sub">Send close — lock topic + date (Template C).</td>
-        </tr>
+        <td><div class="name">Marshall Cohen</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-06-22</td>
+        <td class="sub">Send the close — lock topic + date. <em>(Template C)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Jessica Roza</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Send close — lock topic + date (Template C).</td>
-        </tr>
+        <td><div class="name">Jessica Roza</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Send the close — lock topic + date. <em>(Template C)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Sarah Decker</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Send close — lock topic + date (Template C).</td>
-        </tr>
+        <td><div class="name">Sarah Decker</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Send the close — lock topic + date. <em>(Template C)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">David Rothschild</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Send close — lock topic + date (Template C).</td>
-        </tr>
+        <td><div class="name">David Rothschild <span class="star">★</span></div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Send the close — lock topic + date. <em>(Template C)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Terry Hollingsworth</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Send close — lock topic + date (Template C).</td>
-        </tr>
+        <td><div class="name">Terry Hollingsworth</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Send the close — lock topic + date. <em>(Template C)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">William Chambers</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Send close — lock topic + date (Template C).</td>
-        </tr>
+        <td><div class="name">William Chambers</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Send the close — lock topic + date. <em>(Template C)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Toni Gemayel</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-21</td>
-          <td class="sub">Send close — lock topic + date (Template C).</td>
-        </tr>
+        <td><div class="name">Toni Gemayel</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-21</td>
+        <td class="sub">Send the close — lock topic + date. <em>(Template C)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">JB Mackenzie</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Send close — lock topic + date (Template C).</td>
-        </tr>
+        <td><div class="name">JB Mackenzie <span class="star">★</span></div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Send the close — lock topic + date. <em>(Template C)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Davis Giangiulio</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Send close — lock topic + date (Template C).</td>
-        </tr></tbody>
-      </table></div>
+        <td><div class="name">Davis Giangiulio</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#ff6d3b">In Discussion</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Send the close — lock topic + date. <em>(Template C)</em></td>
+      </tr></tbody></table></div>
     </section>
 <section>
       <div class="sec-head" style="border-left:4px solid #e484bd"><h2>✉️ Invited</h2><span class="count">1</span></div>
-      <p class="blurb">Asked, no response yet. Goal: a value-led nudge. → Template B.</p>
+      <p class="blurb">Asked, no response yet. Goal: a value-led nudge.</p>
       <div class="table-wrap"><table>
         <thead><tr><th>Speaker</th><th>Status</th><th>Tracks</th><th>Confirmed</th><th>Recommended next action</th></tr></thead>
         <tbody><tr>
-          <td><div class="name">Ashley Rodriguez</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#e484bd">Invited</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Follow up if no reply within ~5 days (Template B).</td>
-        </tr></tbody>
-      </table></div>
+        <td><div class="name">Ashley Rodriguez</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#e484bd">Invited</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Follow up if no reply within ~5 days. <em>(Template B)</em></td>
+      </tr></tbody></table></div>
     </section>
 <section>
       <div class="sec-head" style="border-left:4px solid #a9bee8"><h2>🔭 Potential</h2><span class="count">24</span></div>
-      <p class="blurb">Top of funnel. Goal: research, personalise, send the first invite. → Template A.</p>
+      <p class="blurb">Top of funnel. Goal: research, personalise, send the first invite.</p>
       <div class="table-wrap"><table>
         <thead><tr><th>Speaker</th><th>Status</th><th>Tracks</th><th>Confirmed</th><th>Recommended next action</th></tr></thead>
         <tbody><tr>
-          <td><div class="name">Valerie Cross</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Valerie Cross</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Andrew Vrabel</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Andrew Vrabel</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Suzanne Sprague</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Suzanne Sprague</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Vijay Albuquerque</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Vijay Albuquerque</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">John McKinlay</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">John McKinlay</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Andrew Lawrence</div><div class="sub">POC: Nicholas Giangreco</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Andrew Lawrence</div><div class="sub">POC: Nicholas Giangreco</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Tanmay Sheth</div><div class="sub">POC: Nicholas Giangreco</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Tanmay Sheth</div><div class="sub">POC: Nicholas Giangreco</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Zack Panos</div><div class="sub">POC: Nicholas Giangreco</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Zack Panos</div><div class="sub">POC: Nicholas Giangreco</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Ric Best</div><div class="sub">POC: Olga Shemunya, Nicholas Giangreco</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Ric Best</div><div class="sub">POC: Olga Shemunya, Nicholas Giangreco</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Bruce Merati</div><div class="sub">POC: Olga Shemunya, Nicholas Giangreco</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Bruce Merati</div><div class="sub">POC: Olga Shemunya, Nicholas Giangreco</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Eric Hession</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Eric Hession</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">David Solomon</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">David Solomon</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Jamie Dimon</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Jamie Dimon <span class="star">★</span></div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Dan Zucker</div><div class="sub">POC: Olga Shemunya, Nicholas Giangreco</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Dan Zucker</div><div class="sub">POC: Olga Shemunya, Nicholas Giangreco</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Alicia Crighton</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Alicia Crighton <span class="star">★</span></div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Lynne Cook Fitzpatrick</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Lynne Cook Fitzpatrick</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Christopher Perkins</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Christopher Perkins <span class="star">★</span></div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">James Cooper</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">James Cooper</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Dave Ripley</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Dave Ripley <span class="star">★</span></div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Tal Cohen</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Tal Cohen <span class="star">★</span></div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Steve Quirk</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Steve Quirk <span class="star">★</span></div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Haseeb Qureshi</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Haseeb Qureshi <span class="star">★</span></div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Charlie Noyes</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr>
+        <td><div class="name">Charlie Noyes <span class="star">★</span></div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Ben Jackson</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Research + send personalised invite (Template A).</td>
-        </tr></tbody>
-      </table></div>
+        <td><div class="name">Ben Jackson</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#a9bee8">Potential Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Research + send a personalised invite. <em>(Template A)</em></td>
+      </tr></tbody></table></div>
     </section>
 <section>
       <div class="sec-head" style="border-left:4px solid #9cd326"><h2>✅ Confirmed</h2><span class="count">26</span></div>
-      <p class="blurb">Locked in. Goal: confirmation + logistics, collect bio + headshot. → Template D.</p>
+      <p class="blurb">Locked in. Goal: confirmation + logistics, collect bio + headshot.</p>
       <div class="table-wrap"><table>
         <thead><tr><th>Speaker</th><th>Status</th><th>Tracks</th><th>Confirmed</th><th>Recommended next action</th></tr></thead>
         <tbody><tr>
-          <td><div class="name">John Squire</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-06-22</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">John Squire</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-06-22</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Jon Russell</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-06-18</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Jon Russell</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-06-18</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Kate Knibbs</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-06-11</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Kate Knibbs</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-06-11</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Dustin Gouker</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-06-11</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Dustin Gouker</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-06-11</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Matthew Wein</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-06-02</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Matthew Wein</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-06-02</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Duncan Hennes</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-06-01</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Duncan Hennes</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-06-01</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">David Miller</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-06-01</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">David Miller</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-06-01</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">John Conlon</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-05-22</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">John Conlon</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-05-22</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Joe Grubb</div><div class="sub">POC: Klara Schoonraad, Nicholas Giangreco</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-15</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Joe Grubb</div><div class="sub">POC: Klara Schoonraad, Nicholas Giangreco</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-15</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Jacob Fortinsky</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-16</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Jacob Fortinsky</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-16</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Chris Grove</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-16</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Chris Grove</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-16</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Jake Benzaquen</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-16</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Jake Benzaquen</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-16</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Jeremy Levine</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-16</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Jeremy Levine</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-16</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Alex Kane</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-16</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Alex Kane</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-16</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Adam Rosenberg</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-16</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Adam Rosenberg</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-16</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Brian Eggar</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-16</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Brian Eggar</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-16</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Josh Sterling</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-16</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Josh Sterling</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-16</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Contessa Brewer</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-16</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Contessa Brewer</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-16</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Shaun Kelley</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-16</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Shaun Kelley</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-16</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Julie Hoover</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-16</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Julie Hoover</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-16</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Joey Levy</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-16</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Joey Levy</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-16</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Seth Young</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="tag">Prediction Markets</span></td>
-          <td class="sub">2026-04-16</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Seth Young</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="tag">Prediction Markets</span></td>
+        <td class="sub">2026-04-16</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Joe Anzures</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-21</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Joe Anzures</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-21</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Jeanine Hightower-Sellitto</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-24</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Jeanine Hightower-Sellitto</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-24</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Jason Robins</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-24</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr>
+        <td><div class="name">Jason Robins</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-24</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Larry Burns</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-05-06</td>
-          <td class="sub">Send logistics, collect bio + headshot (Template D).</td>
-        </tr></tbody>
-      </table></div>
+        <td><div class="name">Larry Burns</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#9cd326">Confirmed Speaker</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-05-06</td>
+        <td class="sub">Send logistics, collect bio + headshot. <em>(Template D)</em></td>
+      </tr></tbody></table></div>
     </section>
 <section>
       <div class="sec-head" style="border-left:4px solid #bb3354"><h2>❌ Declined / Cancelled</h2><span class="count">3</span></div>
-      <p class="blurb">Out for now. Goal: log the reason, leave the door open. → Template E.</p>
+      <p class="blurb">Out for now. Goal: log the reason, leave the door open.</p>
       <div class="table-wrap"><table>
         <thead><tr><th>Speaker</th><th>Status</th><th>Tracks</th><th>Confirmed</th><th>Recommended next action</th></tr></thead>
         <tbody><tr>
-          <td><div class="name">Mark Wrigley</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#bb3354">Cancelled/Declined</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Log reason; consider re-engage next cycle (Template E).</td>
-        </tr>
+        <td><div class="name">Mark Wrigley</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#bb3354">Cancelled/Declined</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Log the reason; consider re-engaging next cycle. <em>(Template E)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Tarek Mansour</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#bb3354">Cancelled/Declined</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">2026-04-30</td>
-          <td class="sub">Log reason; consider re-engage next cycle (Template E).</td>
-        </tr>
+        <td><div class="name">Tarek Mansour <span class="star">★</span></div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#bb3354">Cancelled/Declined</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">2026-04-30</td>
+        <td class="sub">Log the reason; consider re-engaging next cycle. <em>(Template E)</em></td>
+      </tr>
 <tr>
-          <td><div class="name">Michael Selig</div><div class="sub">POC: Olga Shemunya</div></td>
-          <td><span class="badge" style="background:#bb3354">Cancelled/Declined</span></td>
-          <td><span class="sub">—</span></td>
-          <td class="sub">—</td>
-          <td class="sub">Log reason; consider re-engage next cycle (Template E).</td>
-        </tr></tbody>
-      </table></div>
+        <td><div class="name">Michael Selig</div><div class="sub">POC: Olga Shemunya</div></td>
+        <td><span class="badge" style="background:#bb3354">Cancelled/Declined</span></td>
+        <td><span class="sub">—</span></td>
+        <td class="sub">—</td>
+        <td class="sub">Log the reason; consider re-engaging next cycle. <em>(Template E)</em></td>
+      </tr></tbody></table></div>
     </section>
-  <footer>Generated by <code>scripts/build-site.mjs</code> from <code>site/data.json</code>. 26 confirmed of 64.</footer>
+  </div>
+
+  <div id="plans" class="tab">
+    <p class="note">A securing plan for every speaker. Priority targets (★) carry a tailored angle; the rest use the stage playbook. Click to reveal the recommended email, pre-filled with their first name.</p>
+    <section>
+      <div class="sec-head" style="border-left:4px solid #ff6d3b"><h2>💬 In Discussion</h2><span class="count">10</span></div>
+      <div class="cards"><div class="card priority">
+        <div class="card-head">
+          <div><span class="name">David Rothschild</span> <span class="pill">★ Keynote candidate</span></div>
+          <span class="badge" style="background:#ff6d3b">In Discussion</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">One of the most credible academic-practitioner voices on forecasting and event markets. Offer a headline keynote or fireside that frames the category for the whole room. Low ask, huge credibility — close now.</p>
+        <button class="link-btn" data-toggle="em0">✉️ Show recommended email (C)</button>
+    <div class="email" id="em0" hidden><div class="email-subj"><strong>Subject:</strong> Locking your NEXTPredict slot — topic + date</div><pre>Hi David,
+
+Great talking — I'm excited to get you on the NEXTPredict stage. To lock it in, here's what I'm proposing:
+
+• Session: {{proposed_topic}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{proposed_slot}} (we have flexibility)
+• Alongside: {{co_panelists_or_moderator}}
+
+If that works, just reply "yes" and I'll send the confirmation pack (logistics + a short bio/headshot request). Happy to tweak the angle if you'd rather take it in a different direction.
+
+We're finalising the prediction-markets track by {{deadline}}, and I'd love to have you anchored in it.
+
+Best,
+{{sender_name}}</pre></div>
+      </div>
+<div class="card priority">
+        <div class="card-head">
+          <div><span class="name">JB Mackenzie</span> <span class="pill">★ Distribution angle</span></div>
+          <span class="badge" style="background:#ff6d3b">In Discussion</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Represents the bridge from mainstream retail trading into event contracts — a core NEXTPredict narrative. Close on a panel/fireside on how prediction markets reach a mass audience; pair with an exchange voice for tension.</p>
+        <button class="link-btn" data-toggle="em1">✉️ Show recommended email (C)</button>
+    <div class="email" id="em1" hidden><div class="email-subj"><strong>Subject:</strong> Locking your NEXTPredict slot — topic + date</div><pre>Hi JB,
+
+Great talking — I'm excited to get you on the NEXTPredict stage. To lock it in, here's what I'm proposing:
+
+• Session: {{proposed_topic}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{proposed_slot}} (we have flexibility)
+• Alongside: {{co_panelists_or_moderator}}
+
+If that works, just reply "yes" and I'll send the confirmation pack (logistics + a short bio/headshot request). Happy to tweak the angle if you'd rather take it in a different direction.
+
+We're finalising the prediction-markets track by {{deadline}}, and I'd love to have you anchored in it.
+
+Best,
+{{sender_name}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Aaron Champagne</span></div>
+          <span class="badge" style="background:#ff6d3b">In Discussion</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Warm leads mid-conversation. Goal: lock topic + date this week. Next: Send the close — lock topic + date.</p>
+        <button class="link-btn" data-toggle="em2">✉️ Show recommended email (C)</button>
+    <div class="email" id="em2" hidden><div class="email-subj"><strong>Subject:</strong> Locking your NEXTPredict slot — topic + date</div><pre>Hi Aaron,
+
+Great talking — I'm excited to get you on the NEXTPredict stage. To lock it in, here's what I'm proposing:
+
+• Session: {{proposed_topic}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{proposed_slot}} (we have flexibility)
+• Alongside: {{co_panelists_or_moderator}}
+
+If that works, just reply "yes" and I'll send the confirmation pack (logistics + a short bio/headshot request). Happy to tweak the angle if you'd rather take it in a different direction.
+
+We're finalising the prediction-markets track by {{deadline}}, and I'd love to have you anchored in it.
+
+Best,
+{{sender_name}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Marshall Cohen</span></div>
+          <span class="badge" style="background:#ff6d3b">In Discussion</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-06-22</div>
+        <p class="plan">Warm leads mid-conversation. Goal: lock topic + date this week. Next: Send the close — lock topic + date.</p>
+        <button class="link-btn" data-toggle="em3">✉️ Show recommended email (C)</button>
+    <div class="email" id="em3" hidden><div class="email-subj"><strong>Subject:</strong> Locking your NEXTPredict slot — topic + date</div><pre>Hi Marshall,
+
+Great talking — I'm excited to get you on the NEXTPredict stage. To lock it in, here's what I'm proposing:
+
+• Session: {{proposed_topic}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{proposed_slot}} (we have flexibility)
+• Alongside: {{co_panelists_or_moderator}}
+
+If that works, just reply "yes" and I'll send the confirmation pack (logistics + a short bio/headshot request). Happy to tweak the angle if you'd rather take it in a different direction.
+
+We're finalising the prediction-markets track by {{deadline}}, and I'd love to have you anchored in it.
+
+Best,
+{{sender_name}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Jessica Roza</span></div>
+          <span class="badge" style="background:#ff6d3b">In Discussion</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Warm leads mid-conversation. Goal: lock topic + date this week. Next: Send the close — lock topic + date.</p>
+        <button class="link-btn" data-toggle="em4">✉️ Show recommended email (C)</button>
+    <div class="email" id="em4" hidden><div class="email-subj"><strong>Subject:</strong> Locking your NEXTPredict slot — topic + date</div><pre>Hi Jessica,
+
+Great talking — I'm excited to get you on the NEXTPredict stage. To lock it in, here's what I'm proposing:
+
+• Session: {{proposed_topic}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{proposed_slot}} (we have flexibility)
+• Alongside: {{co_panelists_or_moderator}}
+
+If that works, just reply "yes" and I'll send the confirmation pack (logistics + a short bio/headshot request). Happy to tweak the angle if you'd rather take it in a different direction.
+
+We're finalising the prediction-markets track by {{deadline}}, and I'd love to have you anchored in it.
+
+Best,
+{{sender_name}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Sarah Decker</span></div>
+          <span class="badge" style="background:#ff6d3b">In Discussion</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Warm leads mid-conversation. Goal: lock topic + date this week. Next: Send the close — lock topic + date.</p>
+        <button class="link-btn" data-toggle="em5">✉️ Show recommended email (C)</button>
+    <div class="email" id="em5" hidden><div class="email-subj"><strong>Subject:</strong> Locking your NEXTPredict slot — topic + date</div><pre>Hi Sarah,
+
+Great talking — I'm excited to get you on the NEXTPredict stage. To lock it in, here's what I'm proposing:
+
+• Session: {{proposed_topic}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{proposed_slot}} (we have flexibility)
+• Alongside: {{co_panelists_or_moderator}}
+
+If that works, just reply "yes" and I'll send the confirmation pack (logistics + a short bio/headshot request). Happy to tweak the angle if you'd rather take it in a different direction.
+
+We're finalising the prediction-markets track by {{deadline}}, and I'd love to have you anchored in it.
+
+Best,
+{{sender_name}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Terry Hollingsworth</span></div>
+          <span class="badge" style="background:#ff6d3b">In Discussion</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Warm leads mid-conversation. Goal: lock topic + date this week. Next: Send the close — lock topic + date.</p>
+        <button class="link-btn" data-toggle="em6">✉️ Show recommended email (C)</button>
+    <div class="email" id="em6" hidden><div class="email-subj"><strong>Subject:</strong> Locking your NEXTPredict slot — topic + date</div><pre>Hi Terry,
+
+Great talking — I'm excited to get you on the NEXTPredict stage. To lock it in, here's what I'm proposing:
+
+• Session: {{proposed_topic}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{proposed_slot}} (we have flexibility)
+• Alongside: {{co_panelists_or_moderator}}
+
+If that works, just reply "yes" and I'll send the confirmation pack (logistics + a short bio/headshot request). Happy to tweak the angle if you'd rather take it in a different direction.
+
+We're finalising the prediction-markets track by {{deadline}}, and I'd love to have you anchored in it.
+
+Best,
+{{sender_name}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">William Chambers</span></div>
+          <span class="badge" style="background:#ff6d3b">In Discussion</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Warm leads mid-conversation. Goal: lock topic + date this week. Next: Send the close — lock topic + date.</p>
+        <button class="link-btn" data-toggle="em7">✉️ Show recommended email (C)</button>
+    <div class="email" id="em7" hidden><div class="email-subj"><strong>Subject:</strong> Locking your NEXTPredict slot — topic + date</div><pre>Hi William,
+
+Great talking — I'm excited to get you on the NEXTPredict stage. To lock it in, here's what I'm proposing:
+
+• Session: {{proposed_topic}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{proposed_slot}} (we have flexibility)
+• Alongside: {{co_panelists_or_moderator}}
+
+If that works, just reply "yes" and I'll send the confirmation pack (logistics + a short bio/headshot request). Happy to tweak the angle if you'd rather take it in a different direction.
+
+We're finalising the prediction-markets track by {{deadline}}, and I'd love to have you anchored in it.
+
+Best,
+{{sender_name}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Toni Gemayel</span></div>
+          <span class="badge" style="background:#ff6d3b">In Discussion</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-21</div>
+        <p class="plan">Warm leads mid-conversation. Goal: lock topic + date this week. Next: Send the close — lock topic + date.</p>
+        <button class="link-btn" data-toggle="em8">✉️ Show recommended email (C)</button>
+    <div class="email" id="em8" hidden><div class="email-subj"><strong>Subject:</strong> Locking your NEXTPredict slot — topic + date</div><pre>Hi Toni,
+
+Great talking — I'm excited to get you on the NEXTPredict stage. To lock it in, here's what I'm proposing:
+
+• Session: {{proposed_topic}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{proposed_slot}} (we have flexibility)
+• Alongside: {{co_panelists_or_moderator}}
+
+If that works, just reply "yes" and I'll send the confirmation pack (logistics + a short bio/headshot request). Happy to tweak the angle if you'd rather take it in a different direction.
+
+We're finalising the prediction-markets track by {{deadline}}, and I'd love to have you anchored in it.
+
+Best,
+{{sender_name}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Davis Giangiulio</span></div>
+          <span class="badge" style="background:#ff6d3b">In Discussion</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Warm leads mid-conversation. Goal: lock topic + date this week. Next: Send the close — lock topic + date.</p>
+        <button class="link-btn" data-toggle="em9">✉️ Show recommended email (C)</button>
+    <div class="email" id="em9" hidden><div class="email-subj"><strong>Subject:</strong> Locking your NEXTPredict slot — topic + date</div><pre>Hi Davis,
+
+Great talking — I'm excited to get you on the NEXTPredict stage. To lock it in, here's what I'm proposing:
+
+• Session: {{proposed_topic}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{proposed_slot}} (we have flexibility)
+• Alongside: {{co_panelists_or_moderator}}
+
+If that works, just reply "yes" and I'll send the confirmation pack (logistics + a short bio/headshot request). Happy to tweak the angle if you'd rather take it in a different direction.
+
+We're finalising the prediction-markets track by {{deadline}}, and I'd love to have you anchored in it.
+
+Best,
+{{sender_name}}</pre></div>
+      </div></div>
+    </section>
+<section>
+      <div class="sec-head" style="border-left:4px solid #e484bd"><h2>✉️ Invited</h2><span class="count">1</span></div>
+      <div class="cards"><div class="card">
+        <div class="card-head">
+          <div><span class="name">Ashley Rodriguez</span></div>
+          <span class="badge" style="background:#e484bd">Invited</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Asked, no response yet. Goal: a value-led nudge. Next: Follow up if no reply within ~5 days.</p>
+        <button class="link-btn" data-toggle="em10">✉️ Show recommended email (B)</button>
+    <div class="email" id="em10" hidden><div class="email-subj"><strong>Subject:</strong> Re: Speaking invitation — NEXTPredict 2026</div><pre>Hi Ashley,
+
+Following up on my note about NEXTPredict 2026 — I know inboxes are brutal.
+
+Quick reason to resurface it: {{new_value_hook}} (e.g. "we've just confirmed {{notable_name}}" / "the prediction-markets track is taking shape and I'd still love to hold a headline slot for you").
+
+If you're open in principle, I'm happy to work entirely around your calendar — even a 10-minute call would let me show you the format and the lineup.
+
+Worth a conversation?
+
+Best,
+{{sender_name}}</pre></div>
+      </div></div>
+    </section>
+<section>
+      <div class="sec-head" style="border-left:4px solid #a9bee8"><h2>🔭 Potential</h2><span class="count">24</span></div>
+      <div class="cards"><div class="card priority">
+        <div class="card-head">
+          <div><span class="name">Jamie Dimon</span> <span class="pill">★ Moonshot</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Aspirational marquee fireside. Do NOT cold-email — approach only via a board-level or investor warm intro, billed months out. If unreachable, use the attempt as positioning and pivot energy to attainable exchange/VC names.</p>
+        <button class="link-btn" data-toggle="em11">✉️ Show recommended email (A)</button>
+    <div class="email" id="em11" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Jamie,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card priority">
+        <div class="card-head">
+          <div><span class="name">Alicia Crighton</span> <span class="pill">★ Regulated finance</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Adds regulated-derivatives gravitas and balances the lineup beyond crypto. Angle: how regulated derivatives markets view event contracts. Good credibility-anchoring panel.</p>
+        <button class="link-btn" data-toggle="em12">✉️ Show recommended email (A)</button>
+    <div class="email" id="em12" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Alicia,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card priority">
+        <div class="card-head">
+          <div><span class="name">Christopher Perkins</span> <span class="pill">★ Investor lens</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Investor lens on the category. Angle: 'is this an asset class?' — capital formation and institutional adoption of prediction markets. Good panel anchor.</p>
+        <button class="link-btn" data-toggle="em13">✉️ Show recommended email (A)</button>
+    <div class="email" id="em13" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Christopher,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card priority">
+        <div class="card-head">
+          <div><span class="name">Dave Ripley</span> <span class="pill">★ Exchange CEO</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Exchanges are central to the story. Angle: 'the exchange's role in legitimising event contracts.' Offer a keynote or headline fireside — exchange CEOs value a stage that signals category leadership.</p>
+        <button class="link-btn" data-toggle="em14">✉️ Show recommended email (A)</button>
+    <div class="email" id="em14" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Dave,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card priority">
+        <div class="card-head">
+          <div><span class="name">Tal Cohen</span> <span class="pill">★ Market structure</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Institutional credibility. Angle: market structure and regulation of event contracts — a serious, agenda-setting session. Offer to handle a strong moderator pairing.</p>
+        <button class="link-btn" data-toggle="em15">✉️ Show recommended email (A)</button>
+    <div class="email" id="em15" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Tal,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card priority">
+        <div class="card-head">
+          <div><span class="name">Steve Quirk</span> <span class="pill">★ Retail distribution</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Mass-market distribution from the brokerage side. Angle: 'from trading app to prediction platform — what retail wants.' Accessible, relatable session for a broad audience.</p>
+        <button class="link-btn" data-toggle="em16">✉️ Show recommended email (A)</button>
+    <div class="email" id="em16" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Steve,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card priority">
+        <div class="card-head">
+          <div><span class="name">Haseeb Qureshi</span> <span class="pill">★ VC thesis</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Sharp, quotable, press-friendly. Angle: the VC thesis on prediction markets — who wins. Excellent for a punchy fireside or as a moderator who can spar with founders.</p>
+        <button class="link-btn" data-toggle="em17">✉️ Show recommended email (A)</button>
+    <div class="email" id="em17" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Haseeb,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card priority">
+        <div class="card-head">
+          <div><span class="name">Charlie Noyes</span> <span class="pill">★ Market design</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Deep technical-markets credibility, draws a builder audience. Angle: the plumbing — liquidity, oracles and market design. Pairs well with Haseeb for a VC duo or with an exchange operator.</p>
+        <button class="link-btn" data-toggle="em18">✉️ Show recommended email (A)</button>
+    <div class="email" id="em18" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Charlie,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Valerie Cross</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em19">✉️ Show recommended email (A)</button>
+    <div class="email" id="em19" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Valerie,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Andrew Vrabel</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em20">✉️ Show recommended email (A)</button>
+    <div class="email" id="em20" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Andrew,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Suzanne Sprague</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em21">✉️ Show recommended email (A)</button>
+    <div class="email" id="em21" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Suzanne,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Vijay Albuquerque</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em22">✉️ Show recommended email (A)</button>
+    <div class="email" id="em22" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Vijay,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">John McKinlay</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em23">✉️ Show recommended email (A)</button>
+    <div class="email" id="em23" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi John,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Andrew Lawrence</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Nicholas Giangreco</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em24">✉️ Show recommended email (A)</button>
+    <div class="email" id="em24" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Andrew,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Tanmay Sheth</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Nicholas Giangreco</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em25">✉️ Show recommended email (A)</button>
+    <div class="email" id="em25" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Tanmay,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Zack Panos</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Nicholas Giangreco</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em26">✉️ Show recommended email (A)</button>
+    <div class="email" id="em26" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Zack,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Ric Best</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya, Nicholas Giangreco</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em27">✉️ Show recommended email (A)</button>
+    <div class="email" id="em27" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Ric,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Bruce Merati</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya, Nicholas Giangreco</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em28">✉️ Show recommended email (A)</button>
+    <div class="email" id="em28" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Bruce,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Eric Hession</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em29">✉️ Show recommended email (A)</button>
+    <div class="email" id="em29" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Eric,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">David Solomon</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em30">✉️ Show recommended email (A)</button>
+    <div class="email" id="em30" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi David,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Dan Zucker</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya, Nicholas Giangreco</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em31">✉️ Show recommended email (A)</button>
+    <div class="email" id="em31" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Dan,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Lynne Cook Fitzpatrick</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em32">✉️ Show recommended email (A)</button>
+    <div class="email" id="em32" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Lynne,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">James Cooper</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em33">✉️ Show recommended email (A)</button>
+    <div class="email" id="em33" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi James,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Ben Jackson</span></div>
+          <span class="badge" style="background:#a9bee8">Potential Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Top of funnel. Goal: research, personalise, send the first invite. Next: Research + send a personalised invite.</p>
+        <button class="link-btn" data-toggle="em34">✉️ Show recommended email (A)</button>
+    <div class="email" id="em34" hidden><div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi Ben,
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div></div>
+    </section>
+<section>
+      <div class="sec-head" style="border-left:4px solid #9cd326"><h2>✅ Confirmed</h2><span class="count">26</span></div>
+      <div class="cards"><div class="card">
+        <div class="card-head">
+          <div><span class="name">John Squire</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-06-22</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em35">✉️ Show recommended email (D)</button>
+    <div class="email" id="em35" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi John,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Jon Russell</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-06-18</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em36">✉️ Show recommended email (D)</button>
+    <div class="email" id="em36" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Jon,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Kate Knibbs</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-06-11</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em37">✉️ Show recommended email (D)</button>
+    <div class="email" id="em37" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Kate,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Dustin Gouker</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-06-11</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em38">✉️ Show recommended email (D)</button>
+    <div class="email" id="em38" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Dustin,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Matthew Wein</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-06-02</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em39">✉️ Show recommended email (D)</button>
+    <div class="email" id="em39" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Matthew,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Duncan Hennes</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-06-01</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em40">✉️ Show recommended email (D)</button>
+    <div class="email" id="em40" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Duncan,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">David Miller</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-06-01</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em41">✉️ Show recommended email (D)</button>
+    <div class="email" id="em41" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi David,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">John Conlon</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-05-22</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em42">✉️ Show recommended email (D)</button>
+    <div class="email" id="em42" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi John,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Joe Grubb</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Klara Schoonraad, Nicholas Giangreco · Confirmed 2026-04-15</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em43">✉️ Show recommended email (D)</button>
+    <div class="email" id="em43" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Joe,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Jacob Fortinsky</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-16</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em44">✉️ Show recommended email (D)</button>
+    <div class="email" id="em44" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Jacob,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Chris Grove</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-16</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em45">✉️ Show recommended email (D)</button>
+    <div class="email" id="em45" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Chris,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Jake Benzaquen</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-16</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em46">✉️ Show recommended email (D)</button>
+    <div class="email" id="em46" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Jake,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Jeremy Levine</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-16</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em47">✉️ Show recommended email (D)</button>
+    <div class="email" id="em47" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Jeremy,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Alex Kane</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-16</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em48">✉️ Show recommended email (D)</button>
+    <div class="email" id="em48" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Alex,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Adam Rosenberg</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-16</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em49">✉️ Show recommended email (D)</button>
+    <div class="email" id="em49" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Adam,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Brian Eggar</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-16</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em50">✉️ Show recommended email (D)</button>
+    <div class="email" id="em50" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Brian,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Josh Sterling</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-16</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em51">✉️ Show recommended email (D)</button>
+    <div class="email" id="em51" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Josh,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Contessa Brewer</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-16</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em52">✉️ Show recommended email (D)</button>
+    <div class="email" id="em52" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Contessa,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Shaun Kelley</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-16</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em53">✉️ Show recommended email (D)</button>
+    <div class="email" id="em53" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Shaun,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Julie Hoover</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-16</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em54">✉️ Show recommended email (D)</button>
+    <div class="email" id="em54" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Julie,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Joey Levy</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-16</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em55">✉️ Show recommended email (D)</button>
+    <div class="email" id="em55" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Joey,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Seth Young</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-16 · Prediction Markets</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em56">✉️ Show recommended email (D)</button>
+    <div class="email" id="em56" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Seth,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Joe Anzures</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-21</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em57">✉️ Show recommended email (D)</button>
+    <div class="email" id="em57" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Joe,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Jeanine Hightower-Sellitto</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-24</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em58">✉️ Show recommended email (D)</button>
+    <div class="email" id="em58" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Jeanine,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Jason Robins</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-24</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em59">✉️ Show recommended email (D)</button>
+    <div class="email" id="em59" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Jason,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Larry Burns</span></div>
+          <span class="badge" style="background:#9cd326">Confirmed Speaker</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-05-06</div>
+        <p class="plan">Locked in. Goal: confirmation + logistics, collect bio + headshot. Next: Send logistics, collect bio + headshot.</p>
+        <button class="link-btn" data-toggle="em60">✉️ Show recommended email (D)</button>
+    <div class="email" id="em60" hidden><div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi Larry,
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+      </div></div>
+    </section>
+<section>
+      <div class="sec-head" style="border-left:4px solid #bb3354"><h2>❌ Declined / Cancelled</h2><span class="count">3</span></div>
+      <div class="cards"><div class="card priority">
+        <div class="card-head">
+          <div><span class="name">Tarek Mansour</span> <span class="pill">★ Re-engage — marquee</span></div>
+          <span class="badge" style="background:#bb3354">Cancelled/Declined</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya · Confirmed 2026-04-30</div>
+        <p class="plan">Arguably THE category name; a declined high-value target. Log why they declined, then re-approach for next cycle with a keynote-level offer and a concrete date far enough out. Founder-to-founder ask — escalate the re-invite to a senior NEXT.io exec.</p>
+        <button class="link-btn" data-toggle="em61">✉️ Show recommended email (E)</button>
+    <div class="email" id="em61" hidden><div class="email-subj"><strong>Subject:</strong> Thanks — and a door left open for NEXTPredict</div><pre>Hi Tarek,
+
+Completely understand, and thanks for considering it — timing has to be right.
+
+If you're open to it, I'd love to keep you in mind for a headline slot at the next edition, with much more notice so it's easy to plan around. And if anything frees up before {{event_date}}, the door is wide open.
+
+Out of interest — was it mainly timing, or would a different format have made it easier? Helps me come back with the right ask next time.
+
+Either way, hope to share a stage down the line.
+
+Best,
+{{sender_name}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Mark Wrigley</span></div>
+          <span class="badge" style="background:#bb3354">Cancelled/Declined</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Out for now. Goal: log the reason, leave the door open. Next: Log the reason; consider re-engaging next cycle.</p>
+        <button class="link-btn" data-toggle="em62">✉️ Show recommended email (E)</button>
+    <div class="email" id="em62" hidden><div class="email-subj"><strong>Subject:</strong> Thanks — and a door left open for NEXTPredict</div><pre>Hi Mark,
+
+Completely understand, and thanks for considering it — timing has to be right.
+
+If you're open to it, I'd love to keep you in mind for a headline slot at the next edition, with much more notice so it's easy to plan around. And if anything frees up before {{event_date}}, the door is wide open.
+
+Out of interest — was it mainly timing, or would a different format have made it easier? Helps me come back with the right ask next time.
+
+Either way, hope to share a stage down the line.
+
+Best,
+{{sender_name}}</pre></div>
+      </div>
+<div class="card">
+        <div class="card-head">
+          <div><span class="name">Michael Selig</span></div>
+          <span class="badge" style="background:#bb3354">Cancelled/Declined</span>
+        </div>
+        <div class="card-meta">Owner: Olga Shemunya</div>
+        <p class="plan">Out for now. Goal: log the reason, leave the door open. Next: Log the reason; consider re-engaging next cycle.</p>
+        <button class="link-btn" data-toggle="em63">✉️ Show recommended email (E)</button>
+    <div class="email" id="em63" hidden><div class="email-subj"><strong>Subject:</strong> Thanks — and a door left open for NEXTPredict</div><pre>Hi Michael,
+
+Completely understand, and thanks for considering it — timing has to be right.
+
+If you're open to it, I'd love to keep you in mind for a headline slot at the next edition, with much more notice so it's easy to plan around. And if anything frees up before {{event_date}}, the door is wide open.
+
+Out of interest — was it mainly timing, or would a different format have made it easier? Helps me come back with the right ask next time.
+
+Either way, hope to share a stage down the line.
+
+Best,
+{{sender_name}}</pre></div>
+      </div></div>
+    </section>
+  </div>
+
+  <div id="emails" class="tab">
+    <p class="note">Fill the merge fields, keep it human, send from a real person. Stage → template: Potential → A · Invited → B · In Discussion → C · Confirmed → D · Declined → E.</p>
+    <table class="merge"><thead><tr><th>Field</th><th>Fill with</th></tr></thead><tbody>
+    <tr><td><code>{{event_date}}</code></td><td>Event date (TBC — confirm with Rory)</td></tr>
+    <tr><td><code>{{event_location}}</code></td><td>Venue / city (TBC)</td></tr>
+    <tr><td><code>{{event_url}}</code></td><td>Event landing page</td></tr>
+    <tr><td><code>{{sender_name}}</code> / <code>{{sender_title}}</code></td><td>Whoever owns the row</td></tr>
+    <tr><td><code>{{rory}}</code></td><td>Rory Credland (senior-signer escalations)</td></tr>
+    <tr><td><code>{{proposed_topic}}</code> / <code>{{format}}</code> / <code>{{length}}</code></td><td>Session specifics</td></tr>
+    <tr><td><code>{{confirmed_peer_1/2}}</code></td><td>Confirmed names for social proof</td></tr>
+  </tbody></table>
+    <div class="tpl"><h3>Template A — Initial invitation</h3><div class="sub">Use at stage: Potential</div>
+     <div class="email-subj"><strong>Subject:</strong> Speaking invitation — NEXTPredict 2026</div><pre>Hi {{first_name}},
+
+I'm {{sender_name}} from the content team at NEXT.io. We're building NEXTPredict 2026 ({{event_location}}, {{event_date}}) — the first serious B2B stage dedicated to prediction markets, bringing together the exchanges, investors, regulators and media defining the category.
+
+I'd love to have you on stage. Given your work on {{specific_reason}}, I think you'd be a standout voice in a session on {{proposed_topic}} — likely a {{format}} of about {{length}} minutes. You'd be in good company: {{confirmed_peer_1}} and {{confirmed_peer_2}} are already confirmed.
+
+We keep it easy on your side — we'll draft a session title and abstract for your sign-off, pair you with a strong moderator, and keep prep to a single short call.
+
+Would you be open to a 15-minute chat next week to explore it?
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+<div class="tpl"><h3>Template B — Follow-up (no reply)</h3><div class="sub">Use at stage: Invited</div>
+     <div class="email-subj"><strong>Subject:</strong> Re: Speaking invitation — NEXTPredict 2026</div><pre>Hi {{first_name}},
+
+Following up on my note about NEXTPredict 2026 — I know inboxes are brutal.
+
+Quick reason to resurface it: {{new_value_hook}} (e.g. "we've just confirmed {{notable_name}}" / "the prediction-markets track is taking shape and I'd still love to hold a headline slot for you").
+
+If you're open in principle, I'm happy to work entirely around your calendar — even a 10-minute call would let me show you the format and the lineup.
+
+Worth a conversation?
+
+Best,
+{{sender_name}}</pre></div>
+<div class="tpl"><h3>Template C — Move to close</h3><div class="sub">Use at stage: In Discussion</div>
+     <div class="email-subj"><strong>Subject:</strong> Locking your NEXTPredict slot — topic + date</div><pre>Hi {{first_name}},
+
+Great talking — I'm excited to get you on the NEXTPredict stage. To lock it in, here's what I'm proposing:
+
+• Session: {{proposed_topic}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{proposed_slot}} (we have flexibility)
+• Alongside: {{co_panelists_or_moderator}}
+
+If that works, just reply "yes" and I'll send the confirmation pack (logistics + a short bio/headshot request). Happy to tweak the angle if you'd rather take it in a different direction.
+
+We're finalising the prediction-markets track by {{deadline}}, and I'd love to have you anchored in it.
+
+Best,
+{{sender_name}}</pre></div>
+<div class="tpl"><h3>Template D — Confirmation &amp; logistics</h3><div class="sub">Use at stage: Confirmed</div>
+     <div class="email-subj"><strong>Subject:</strong> You're confirmed for NEXTPredict 2026 🎉</div><pre>Hi {{first_name}},
+
+Delighted to have you confirmed for NEXTPredict 2026 — thank you. Here's everything in one place:
+
+• Session: {{session_title}}
+• Format: {{format}}, ~{{length}} minutes
+• Date/time: {{confirmed_slot}}
+• Venue: {{event_location}}
+
+Two quick things so we can promote you:
+1. A short speaker bio (50–100 words)
+2. A high-res headshot
+
+If you can send those by {{asset_deadline}}, we'll get you onto the agenda and marketing. I'll follow up closer to the date with AV details and a brief prep call.
+
+Best,
+{{sender_name}}
+{{sender_title}} · {{event_url}}</pre></div>
+<div class="tpl"><h3>Template E — Re-engage / graceful close</h3><div class="sub">Use at stage: Declined</div>
+     <div class="email-subj"><strong>Subject:</strong> Thanks — and a door left open for NEXTPredict</div><pre>Hi {{first_name}},
+
+Completely understand, and thanks for considering it — timing has to be right.
+
+If you're open to it, I'd love to keep you in mind for a headline slot at the next edition, with much more notice so it's easy to plan around. And if anything frees up before {{event_date}}, the door is wide open.
+
+Out of interest — was it mainly timing, or would a different format have made it easier? Helps me come back with the right ask next time.
+
+Either way, hope to share a stage down the line.
+
+Best,
+{{sender_name}}</pre></div>
+    <h2 style="font-size:16px;margin:22px 0 10px">Personalised examples</h2>
+    <p class="note">⚠️ Verify inferred roles before sending. These show tone for senior, high-value names.</p>
+    <div class="tpl"><h3>David Rothschild — open with the keynote (close)</h3><div class="email-subj"><strong>Subject:</strong> Open NEXTPredict with the keynote?</div><pre>Hi David,
+
+Following our exchange — I'd love to go one better than a panel. Would you open NEXTPredict 2026 with a keynote that frames where prediction markets are actually heading? You're one of the few people who can set that agenda credibly for a room of operators, investors and regulators.
+
+~20 minutes, your thesis, your framing. We'll handle everything else and build the rest of the track around it. Confirmed so far: {{confirmed_peer_1}}, {{confirmed_peer_2}}.
+
+Can I hold the opening slot for you while we talk details?
+
+Best,
+{{sender_name}}</pre></div>
+<div class="tpl"><h3>Tarek Mansour — re-engage a declined marquee name</h3><div class="email-subj"><strong>Subject:</strong> NEXTPredict 2026 — a keynote with your name on it</div><pre>Hi Tarek,
+
+I know the timing didn't work earlier, and I respect that. But NEXTPredict is being built around exactly the category you've defined, and it feels wrong not to have you anchoring it.
+
+So a concrete offer: a keynote fireside, {{event_date}}, billed as a headline moment — minimal prep, maximum stage. {{rory}} (who leads our content) would personally host or hand-pick the interviewer.
+
+If there's any version of this that works for your calendar, I'll build the slot around you. Worth 15 minutes to explore?
+
+Best,
+{{sender_name}} (on behalf of {{rory}}, NEXT.io)</pre></div>
+  </div>
+
+  <div id="method" class="tab">
+    <p class="note">A repeatable method that works for any speaker — taking a name from Potential to on-stage.</p>
+    <div class="step"><div class="step-n">1</div><div><h3>Lead with the audience, not the ask</h3><p>Senior people say yes to rooms. Open with who they'll be in front of and alongside — operators, exchange leaders, investors, press. Name-drop confirmed peers; social proof closes faster than flattery.</p></div></div>
+<div class="step"><div class="step-n">2</div><div><h3>Make the first ask specific</h3><p>"Will you speak?" stalls. "Would you headline a 25-minute fireside on whether event contracts go mainstream in 2026?" converts. Propose format + topic + rough date so they can picture it.</p></div></div>
+<div class="step"><div class="step-n">3</div><div><h3>Reduce their effort to near zero</h3><p>Offer to draft their session title and abstract, pair them with a strong moderator, and keep prep to one 30-minute call. The easier it looks, the faster the yes.</p></div></div>
+<div class="step"><div class="step-n">4</div><div><h3>Create gentle urgency</h3><p>"We're finalising the prediction-markets track in the next two weeks and I'd love to hold a headline slot for you." Real scarcity beats manufactured pressure.</p></div></div>
+<div class="step"><div class="step-n">5</div><div><h3>Always use the warmest path in</h3><p>Cold email is the last resort for senior targets. Check for a mutual connection, a recent article/launch to reference, or an existing NEXT.io relationship first.</p></div></div>
+<div class="step"><div class="step-n">6</div><div><h3>Follow up like a professional</h3><p>Three touches, ~4–5 days apart, each adding value (a new confirmed name, an agenda detail, a press angle). After three silent touches, mark Leave for Now and revisit next cycle.</p></div></div>
+  </div>
+
+  <footer>Generated by <code>scripts/build-site.mjs</code> from <code>site/data.json</code>. 26 confirmed of 64. Roles/angles for priority targets are inferred — verify before outreach.</footer>
 </div>
+<script>
+  document.querySelectorAll('.tabs button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.tabs button').forEach(function(x){x.classList.remove('active');});
+      document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active');
+      document.getElementById(b.getAttribute('data-tab')).classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+  document.querySelectorAll('[data-toggle]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var el=document.getElementById(b.getAttribute('data-toggle'));
+      el.hidden=!el.hidden;
+
+    });
+  });
+</script>
 </body></html>
