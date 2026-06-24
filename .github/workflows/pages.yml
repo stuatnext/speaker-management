@@ -1,0 +1,58 @@
+name: Deploy NEXTPredict site to GitHub Pages
+
+# Publishes the static site/ folder to GitHub Pages.
+#
+# One-time setup: Repo Settings → Pages → "Build and deployment" → Source:
+# "GitHub Actions". (configure-pages below also attempts to enable it.)
+#
+# To refresh the published data from the live board, add a repository secret
+# MONDAY_API_TOKEN and run the "Refresh from board" job via workflow_dispatch,
+# or rebuild locally with `node scripts/build-site.mjs` and commit site/.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+    inputs:
+      refresh:
+        description: "Refresh site/ from the live board before deploying (needs MONDAY_API_TOKEN secret)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Optionally refresh from the live board
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.refresh }}
+        env:
+          MONDAY_API_TOKEN: ${{ secrets.MONDAY_API_TOKEN }}
+        run: node scripts/build-site.mjs
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
