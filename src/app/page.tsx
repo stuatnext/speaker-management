@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import type { BoardMeta, Speaker, SpeakerInput } from "@/lib/monday/types";
 import {
   createSpeaker,
@@ -142,10 +143,17 @@ export default function HomePage() {
   return (
     <>
       <header className="app-header">
-        <h1>Speaker Management</h1>
-        <p>
-          {meta ? meta.boardName : "Loading…"} · synced with monday.com
-        </p>
+        <div className="header-nav">
+          <div>
+            <h1>Speaker Management</h1>
+            <p>
+              {meta ? meta.boardName : "Loading…"} · synced with monday.com
+            </p>
+          </div>
+          <Link href="/nextpredict" className="btn btn-sm">
+            NEXTPredict pipeline →
+          </Link>
+        </div>
       </header>
 
       <main className="container">
