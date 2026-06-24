@@ -38,6 +38,25 @@ tracking system for the **NEXTPredict 2026** pipeline under
 Regenerate the tracker from the board any time with `npm run tracker:generate`
 (requires `MONDAY_API_TOKEN`).
 
+### Published site (GitHub Pages)
+
+A static, read-only snapshot of the NEXTPredict pipeline is published to GitHub
+Pages from the [`site/`](./site) folder via
+[`.github/workflows/pages.yml`](./.github/workflows/pages.yml).
+
+- **URL (once enabled):** https://stuatnext.github.io/speaker-management/
+- **Enable once:** Repo Settings → Pages → Source → **GitHub Actions**.
+- **Rebuild locally:** `node scripts/build-site.mjs` (reads `site/data.json`;
+  set `MONDAY_API_TOKEN` to refresh from the live board first), then commit.
+- **Refresh in CI:** run the workflow via *workflow_dispatch* with `refresh: true`
+  and a `MONDAY_API_TOKEN` repository secret.
+
+> ⚠️ **Public exposure.** GitHub Pages on this public repo is world-readable.
+> The published page contains real speaker names, statuses and owners. The page
+> sets `robots: noindex` to reduce search indexing, but anyone with the link can
+> view it. This was explicitly confirmed by the repo owner. To take it down,
+> disable Pages in repo settings.
+
 ## Getting started
 
 ### 1. Configure the monday.com API token
